@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Poll Voting App</title>
+
+    <script type="module">
+
+        // Firebase SDK ko import karein
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+
+        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+        // Firebase configuration
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyCFKfePkEQVYBUl90z-pEzdy6tm2VTzNqY",
+
+            authDomain: "poll-voting-f4dc4.firebaseapp.com",
+
+            projectId: "poll-voting-f4dc4",
+
+            storageBucket: "poll-voting-f4dc4.appspot.com",
+
+            messagingSenderId: "416812868680",
+
+            appId: "1:416812868680:web:8b775764292fbb6db8a47d",
+
+            measurementId: "G-0B2G021D7B"
+
+        };
+
+        // Firebase initialize karein
+
+        const app = initializeApp(firebaseConfig);
+
+        const database = getDatabase(app);
+
+        // Vote record karne wala function
+
+        function vote(option) {
+
+            const voteRef = ref(database, 'votes/' + option);
+
+            set(voteRef, {
+
+                voteCount: 1
+
+            }).then(() => {
+
+                console.log("Vote recorded for " + option);
+
+            }).catch((error) => {
+
+                console.error("Error recording vote: ", error);
+
+            });
+
+        }
+
+        // Votes ko retrieve karne wala function
+
+        function getVotes() {
+
+            const votesRef = ref(database, 'votes/');
+
+            onValue(votesRef, (snapshot) => {
+
+                const data = snapshot.val();
+
+                let rameshVotes = data['Ramesh_Potalia'] ? data['Ramesh_Potalia'].voteCount : 0;
+
+                let kevalchandVotes = data['Kevalchand_Saran'] ? data['Kevalchand_Saran'].voteCount : 0;
+
+                
+
+                document.getElementById("results").innerText = `रमेश पोटलिया: ${rameshVotes} votes\nकेवलचंद सारण: ${kevalchandVotes} votes`;
+
+            });
+
+        }
+
+        // Page load hone par votes ko retrieve karein
+
+        window.onload = getVotes;
+
+    </script>
+
+</head>
+
+<body>
+
+    <h1>Vote for Your Candidate</h1>
+
+    <button onclick="vote('Ramesh_Potalia')">रमेश पोटलिया</button>
+
+    <button onclick="vote('Kevalchand_Saran')">केवलचंद सारण</button>
+
+    
+
+    <h2>Current Vote Results:</h2>
+
+    <pre id="results"></pre>
+
+</body>
+
+</html>
