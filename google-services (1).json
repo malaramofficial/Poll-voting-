@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "416812868680",
+    "project_id": "poll-voting-f4dc4",
+    "storage_bucket": "poll-voting-f4dc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416812868680:android:f39773d115d48570b8a47d",
+        "android_client_info": {
+          "package_name": "Poll.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTxFTCNK__CoYJBH75LMk0ZwvTP0BZfOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
